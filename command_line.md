@@ -45,3 +45,17 @@ The above will update the permissions from:
 to: 
 
 `drwxrwxrwx   4 jasonhegarty  staff   128B  5 Jul 13:55 py101`
+
+## Exercises
+1. Which user and group are assigned to the /etc folder on your computer?
+
+
+```
+ls -l
+lrwxr-xr-x@  1 root  wheel    11B  9 Feb  2023 etc -> private/etc
+```
+
+User: root and group:'wheel'
+
+
+
