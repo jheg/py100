@@ -57,5 +57,56 @@ lrwxr-xr-x@  1 root  wheel    11B  9 Feb  2023 etc -> private/etc
 
 User: root and group:'wheel'
 
+2. Which user and group are assigned to the $HOME folder?
+
+```
+ls -l
+drwxr-x---+ 51 jasonhegarty  staff  1632  3 Jul 21:26 jasonhegarty
+```
+
+User: jasonhegarty group: staff
+
+*SOLUTION: ls -la $HOME then look for the . directory*
+
+3. What are mary's permissions for the napkins file in the following outputs?
+```
+$ groups mary
+mary travelers vip
+$ ls -l custodian_closet
+total 0
+-rw-rw----  1 acmeair acmeair 0 Jul 21 17:57 napkins
+-rw-rw----  1 acmeair acmeair 0 Jul 21 17:57 paper_towels
+```
+
+She has no access permissions on this file.
 
 
+4. What are mary's permissions to the donuts file in the following example:
+
+```
+$ groups
+mary travelers vip
+$ ls -l vip_lounge
+$ ls -l ./
+...
+-rw-rw----  1 acmeair  vip  0 Jul 21 17:57 donuts
+...
+```
+
+She has read and write access because she belongs to the vip group
+
+5. What are mary's permissions to the laptop file in the following example? What are the permissions for the group acmeinc?
+
+```
+$ ls -l vip_lounge
+...
+-r-xrwx---  1 mary acmeinc 0 Jul 21 17:57 laptop
+...
+```
+
+Mary has read and execute access 
+The acmeinc group has read, write and execute access
+
+6. Practice using sudo to log in as root:
+
+done.
