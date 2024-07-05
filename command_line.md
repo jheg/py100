@@ -33,3 +33,15 @@ You can also set access levels for all 3 (USer, Group & Other) with 3 numbers fr
 |5       |Can read and execute (4+1).|
 |6       |Can read and write (4+2).|
 |7       |Can read, write and execute (4+2+1).|
+
+Use chmod to update all 3
+
+`chmod 777 py100`
+
+The above will update the permissions from: 
+
+`drwxr-xr-x   4 jasonhegarty  staff   128B  5 Jul 13:55 py101`
+
+to: 
+
+`drwxrwxrwx   4 jasonhegarty  staff   128B  5 Jul 13:55 py101`
