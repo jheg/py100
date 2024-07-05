@@ -25,3 +25,10 @@ You can also set access levels for all 3 (USer, Group & Other) with 3 numbers fr
 | Number | Permissions  |
 |:------:|:-------------|
 |0       |No permission granted.|
+|1       |Can execute.|
+|2       |Can write.|
+|3       |Can write and execute (1+2).|
+|4       |Can read.|
+|5       |Can read and execute (4+1).|
+|6       |Can read and write (4+2).|
+|7       |Can read, write and execute (4+2+1).|
