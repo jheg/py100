@@ -20,17 +20,21 @@ Activity monitor ^ Type q to exit
 Launches the Python REPL. Type exit() to leave python
 
 `$ irb`
+
 Launches the Ruby REPL. Type exit to leave irb.
 
 `$ node`
+
 Launches Javascript REPL. Type Control-D (or Control-C with confirmation) to leave node. 
 
 ## Editors
 
 `$ nano`
+
 To exit without saving: Control + 'x' then n to discard changes
 To Exit and Save: Control + o then Enter, then Control + x
 
 `$ vim`
+
 To exit without saving: Esc + :q!
 To exit and Save: Esc + :wq
