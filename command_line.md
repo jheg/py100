@@ -1,6 +1,6 @@
 # Command Line notes
 
-## file and directory permissions
+## file and directory permissions
 
 `drwxr-xr-x   4 jasonhegarty  staff   128B  5 Jul 13:55 py101`
 
@@ -11,5 +11,5 @@ POS
 4-6:    Denotes the Read (r) Write (w) and Execute (x) permissions for Group
 7-9:    Denotes the Read (r) Write (w) and Execute (x) permissions for Other
 
-**If no permissions are gramted (-)**
+*If no permissions are gramted (-)*
 
