@@ -11,11 +11,11 @@
 
 # EXAMPLE
 # (1...99)
-# 1
-# 3   
-# 5
+# 2
+# 4   
+# 6
 # ...
-# 99
+# 98
 
 def even_numbers():
     for num in range(2,99,2):
