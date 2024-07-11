@@ -67,8 +67,8 @@ print('------')
 print(-2 % 1)
 print(2 % 5)
 print(20 % 1)
-print(-7 % 13)
+print(-7 % 13)          # 6
 print(abs(-2) % 1)
 print(abs(2) % 5)
 print(abs(20) % 1)
-print(abs(-7) % 13)
+print(abs(-7) % 13)     # 7
