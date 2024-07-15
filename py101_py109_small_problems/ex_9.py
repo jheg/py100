@@ -17,7 +17,8 @@ gregorian_adoption = {
     "IT": 1582,
     "GB": 1752,
     "SE": 1753,
-    "JP": 1873
+    "JP": 1873,
+    "GR": 1923
 }
 
 def is_leap_year(country_code, year):
