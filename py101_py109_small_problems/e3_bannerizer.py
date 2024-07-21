@@ -31,8 +31,8 @@ def print_wrapped(str, num):
 
     top_bottom_border = f'+--{num * "-"}--+'
     empty_line = f'|  {num * " "}  |'
-
     msgs = []
+    
     current_start_index = 0
 
     while current_start_index <= str_length:
