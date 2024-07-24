@@ -15,7 +15,7 @@ print("What operation would you liek to perform?\n"
       "1) Add 2) Subtract 3) Multiply 4) Divide")
 operation = input()
 
-if operation == '1':    # '1' represents addition 
+if operation == '1':    # '1' represents addition
     output = int(number1) + int(number2)
 elif operation == '2':  # '2' represents subtraction
     output = int(number1) - int(number2)
