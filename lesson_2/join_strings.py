@@ -1,4 +1,4 @@
-# a function that takes a list of strings, and returns a string that is all 
+# a function that takes a list of strings, and returns a string that is all
 # those strings concatenated together
 
 # START
@@ -15,15 +15,15 @@
 
 # PRINT longer_string
 
-def join_strings(list):
+def join_strings(list_of_strings):
     iterator = 0
     longer_string = ''
 
-    while iterator < len(list):
-        current_string = list[iterator]
+    while iterator < len(list_of_strings):
+        current_string = list_of_strings[iterator]
         longer_string = longer_string + current_string
         iterator += 1
-    
+
     print(longer_string)
 
 join_strings(['Jason', 'Lee', 'Hegarty', 'Victoria', 'Rance'])
