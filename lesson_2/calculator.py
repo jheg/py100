@@ -5,6 +5,7 @@
 # X Perform the operation on the two numbers.
 # X Ask the user if they want to run another calculation.
 # X Extract messages into separate json file
+# X Allow user to select language
 
 import json
 
