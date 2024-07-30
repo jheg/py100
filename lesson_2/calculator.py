@@ -5,7 +5,8 @@
 # X Perform the operation on the two numbers.
 # X Ask the user if they want to run another calculation.
 # X Extract messages into separate json file
-# Internationalise messages
+# X Internationalise messages
+# X Allow floating point numbers
 
 import json
 
@@ -17,7 +18,7 @@ def prompt(message):
 
 def invalid_number(number_str):
     try:
-        int(number_str)
+        float(number_str)
     except ValueError:
         return True
 
@@ -54,13 +55,13 @@ while end_calculator:
 
     match operation:
         case '1':
-            output = int(number1) + int(number2)
+            output = float(number1) + float(number2)
         case '2':
-            output = int(number1) - int(number2)
+            output = float(number1) - float(number2)
         case '3':
-            output = int(number1) * int(number2)
+            output = float(number1) * float(number2)
         case '4':
-            output = int(number1) / int(number2)
+            output = float(number1) / float(number2)
 
     prompt(f"{data[language]['result']}{output}")
     prompt(data[language]['again'])
