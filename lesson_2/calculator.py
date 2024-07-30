@@ -3,8 +3,13 @@
 # X Ask the user for an operation to perform.
 # X Print the result to the terminal.
 # X Perform the operation on the two numbers.
-# Ask the user if they want to run another calculation.
+# X Ask the user if they want to run another calculation.
+# X Extract messages into separate json file
 
+import json
+
+with open('calculator_messages.json', 'r') as file:
+    data = json.load(file)
 
 def prompt(message):
     print(f'=> {message}')
@@ -17,26 +22,25 @@ def invalid_number(number_str):
 
     return False
 
-prompt('Welcome to Calculator!')
+prompt(data['welcome'])
 end_calculator = True
 
 while end_calculator:
-    prompt("What's the first number?")
+    prompt(data['1st'])
     number1 = input()
 
     while invalid_number(number1):
-        prompt("Hmm... that doesn't look like a valid number.")
+        prompt(data['invalid'])
         number1 = input()
 
-    prompt("What's the second number?")
+    prompt(data['2nd'])
     number2 = input()
 
     while invalid_number(number2):
-        prompt("Hmm... that doesn't look like a valid number.")
+        prompt(data['invalid'])
         number2 = input()
 
-    prompt("What operation would you like to perform?\n"
-        "1) Add 2) Subtract 3) Multiply 4) Divide")
+    prompt(data['operation'])
     operation = input()
 
     while operation not in ['1', '2', '3', '4']:
@@ -54,11 +58,9 @@ while end_calculator:
             output = int(number1) / int(number2)
 
     prompt(f'The result is: {output}')
-    prompt("Do you want to run another calculation?\n"
-           "To EXIT press Enter\n"
-           "To run another calculation press any key + Enter\n")
-           
+    prompt(data['again'])
+
     end_calculator = input()
 
     if end_calculator == '':
-        prompt('Goodbye.\n')
+        prompt(data['bye'])
