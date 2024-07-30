@@ -5,6 +5,7 @@
 # X Perform the operation on the two numbers.
 # X Ask the user if they want to run another calculation.
 # X Extract messages into separate json file
+# Internationalise messages
 
 import json
 
@@ -22,25 +23,29 @@ def invalid_number(number_str):
 
     return False
 
-prompt(data['welcome'])
+prompt('Please choose your language, English (en) or Spanish (es)')
+language = input()
+
+prompt(data[language]['welcome'])
 end_calculator = True
 
 while end_calculator:
-    prompt(data['1st'])
+
+    prompt(data[language]['1st'])
     number1 = input()
 
     while invalid_number(number1):
-        prompt(data['invalid'])
+        prompt(data[language]['invalid'])
         number1 = input()
 
-    prompt(data['2nd'])
+    prompt(data[language]['2nd'])
     number2 = input()
 
     while invalid_number(number2):
-        prompt(data['invalid'])
+        prompt(data[language]['invalid'])
         number2 = input()
 
-    prompt(data['operation'])
+    prompt(data[language]['operation'])
     operation = input()
 
     while operation not in ['1', '2', '3', '4']:
@@ -57,10 +62,10 @@ while end_calculator:
         case '4':
             output = int(number1) / int(number2)
 
-    prompt(f'The result is: {output}')
-    prompt(data['again'])
-
+    prompt(f"{data[language]['result']}{output}")
+    prompt(data[language]['again'])
     end_calculator = input()
 
+
     if end_calculator == '':
-        prompt(data['bye'])
+        prompt(data[language]['bye'])
