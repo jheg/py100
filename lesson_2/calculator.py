@@ -35,7 +35,7 @@ while end_calculator:
         prompt("Hmm... that doesn't look like a valid number.")
         number2 = input()
 
-    prompt("What operation would you liek to perform?\n"
+    prompt("What operation would you like to perform?\n"
         "1) Add 2) Subtract 3) Multiply 4) Divide")
     operation = input()
 
