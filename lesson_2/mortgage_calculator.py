@@ -6,6 +6,8 @@
 # X Perform the calculation and output the result to the terminal
 # X Build in validation to handle bad input
 # X Tidy up display output
+# Validate where years and months is not greater than 0
+
 import math
 
 def prompt(msg):
