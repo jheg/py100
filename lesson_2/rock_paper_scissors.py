@@ -15,12 +15,8 @@ The winner is displayed.
 """
 # X Extract messages to a dictionary
 # X Simplify input choices with a single key input from ['1','2','3']
-# Build function to check high score
-# Calculate len of longest message in order to wrap game in a border frame
-# Allow 2 player game
 # X Build best of 5
 # X Extend with Spock and Lizard options
-# Extract high scores out of game session rock_paper_scissors_high_scores.py
 
 import random
 
