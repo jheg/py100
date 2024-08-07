@@ -7,6 +7,7 @@
 # X Build in validation to handle bad input
 # X Tidy up display output
 # Validate where years and months is not greater than 0
+# Display the loan balance month by month schedule
 
 import math
 
