@@ -44,6 +44,7 @@ Options:
 Best of 5, good luck!
 """
 MESSAGES = {
+    "choose":               "Enter your choice:",
     "winner":               "You win!",
     "lose":                 "You lose",
     "tie":                  "It's a tie\n",
@@ -89,8 +90,7 @@ while True:
             prompt(f"Player 1 score: {player_1_score}")
             prompt(f"Computer score: {player_2_score}\n")
 
-        # prompt(f'| Choose: {", ".join(formatted_choices)}')
-        prompt('Enter your choice:')
+        prompt(MESSAGES["choose"])
         player_choice = input()
         computer_choice = random.choice(list(VALID_CHOICES.keys()))
 
@@ -124,7 +124,6 @@ while True:
         if player_2_score == 3:
             prompt(MESSAGES["end_loser"])
             break
-
 
     prompt(MESSAGES['play_again'])
     play_again = input()
