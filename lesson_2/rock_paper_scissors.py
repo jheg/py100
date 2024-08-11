@@ -1,5 +1,6 @@
 import random
 import time
+import os
 
 VALID_CHOICES = {
     '1': 'rock',
@@ -8,6 +9,10 @@ VALID_CHOICES = {
     '4': 'lizard',
     '5': 'spock'
 }
+
+formatted_choices = [
+    f"{value} ({key})" for key, value in VALID_CHOICES.items()
+]
 
 WINNING_COMBOS = {
     'rock': {
@@ -31,8 +36,30 @@ WINNING_COMBOS = {
         'rock': 'vaporizes',
         }
 }
-WELCOME = """
-Welcome to Rock, Paper, Scissors, Lizard, Spock.
+
+MESSAGES = {
+    "choose":               "Enter your choice:",
+    "winner":               "You win!",
+    "lose":                 "You lose",
+    "tie":                  "It's a tie\n",
+    "end_winner":           "You are the winner!",
+    "end_loser":            "Game over, you lose.",
+    "play_again":           "Play again? (y/n)",
+    "end_game":             "Goodbye, thanks for playing."
+}
+
+def clear_screen():
+    # clear screen based on operating system
+    os.system('cls' if os.name == 'nt' else 'clear' )
+
+def wait(num):
+    time.sleep(num)
+
+def prompt(msg):
+    print(f"==> {msg}")
+
+def display_welcome_message():
+    print("""Welcome to Rock, Paper, Scissors, Lizard, Spock.
 
 Options: 
 1 => Rock (crushes lizard & scissors)
@@ -42,90 +69,129 @@ Options:
 5 => Spock (smashes scissors & vaporizes rock)
 
 Best of 5, good luck!
-"""
-MESSAGES = {
-    "choose":               "Enter your choice:",
-    "winner":               "You win!",
-    "lose":                 "You lose",
-    "tie":                  "It's a tie\n",
-    "end_winner":           "You are the winner!",
-    "end_loser":            "Game over, you lose.",
-    "play_again":           "Play again? (y/n)"
-}
+""")
 
-formatted_choices = [
-    f"{value} ({key})" for key, value in VALID_CHOICES.items()
-]
+def display_round(current_round):
+    if current_round > 1:
+        clear_screen()
+    prompt(f'Round {current_round}')
+
+def display_scoreboard(game_round, player_score, computer_score):
+    if game_round > 1:
+        prompt(f"Player 1 score: {player_score}")
+        prompt(f"Computer score: {computer_score}\n")
+
+def prompt_player_choice():
+    prompt(MESSAGES["choose"])
+    player_choice = input()
+
+    while invalid_choice(player_choice):
+        prompt(f'Please select from the following: '
+                f'{", ".join(formatted_choices)}')
+        player_choice = input('Enter your choice: ')
+
+    return VALID_CHOICES[player_choice]
 
 def invalid_choice(choice):
-    if choice not in VALID_CHOICES.keys():
+    if choice not in list(VALID_CHOICES):
         return True
     return False
 
-def prompt(msg):
-    print(f"==> {msg}")
+def get_computer_choice():
+    return random.choice(list(WINNING_COMBOS))
 
-def update_score(number):
-    return number + 1
+def display_choices(player_choice_string, computer_choice_string):
+    prompt(f'You: {" " * 15}{player_choice_string.capitalize()}')
+    prompt(f'Computer: {" " * 10}{computer_choice_string.capitalize()}')
 
 def player_wins(player_1_choice, player_2_choice):
-    return player_2_choice in WINNING_COMBOS[player_1_choice].keys()
+    return player_2_choice in list(WINNING_COMBOS[player_1_choice])
 
-def display_outcome(winner, loser):
-    prompt(f'Outcome:{" " * 12}{VALID_CHOICES[winner]} '
-           f'{WINNING_COMBOS[VALID_CHOICES[winner]][VALID_CHOICES[loser]]} '
-           f'{VALID_CHOICES[loser]}\n')
+def get_winner(player, computer):
+    if player_wins(player, computer):
+        winner = "you"
+        return winner
+    if player_wins(computer, player):
+        winner = "computer"
+        return winner
 
-while True:
-    prompt(WELCOME)
+    return False
 
-    player_1_score = 0
-    player_2_score = 0
-    game_round = 1
+def display_result(round_winner):
+    if round_winner == "you":
+        prompt(f'Result:{" " * 13}{MESSAGES["winner"]}')
+    elif round_winner == "computer":
+        prompt(f'Result:{" " * 13}{MESSAGES["lose"]}')
+    else:
+        prompt(f'Result:{" " * 13}{MESSAGES["tie"]}')
 
-    while True:
-        time.sleep(1)
-        prompt(f'Round {game_round}')
-        if game_round > 1:
-            prompt(f"Player 1 score: {player_1_score}")
-            prompt(f"Computer score: {player_2_score}\n")
+def display_outcome(player_choice, computer_choice, round_winner):
+    match round_winner:
+        case False:
+            return False
+        case "you":
+            prompt(f'Outcome:{" " * 12}{player_choice} '
+                f'{WINNING_COMBOS[player_choice][computer_choice]} '
+                f'{computer_choice}\n')
+        case "computer":
+            prompt(f'Outcome:{" " * 12}{computer_choice} '
+                f'{WINNING_COMBOS[computer_choice][player_choice]} '
+                f'{player_choice}\n')
 
-        prompt(MESSAGES["choose"])
-        player_choice = input()
-        computer_choice = random.choice(list(VALID_CHOICES.keys()))
+def update_score(num):
+    return num + 1
 
-        while invalid_choice(player_choice):
-            prompt(f'Please select from the following: '
-                    f'{", ".join(formatted_choices)}')
-            player_choice = input('Enter your choice: ')
+def game_over_check(player_score, computer_score):
+    game_over = False
+    if player_score == 3:
+        prompt(MESSAGES["end_winner"])
+        game_over = True
+        return game_over
+    if computer_score == 3:
+        prompt(MESSAGES["end_loser"])
+        game_over = True
+        return game_over
 
-        player_choice_string = VALID_CHOICES[player_choice]
-        computer_choice_string = VALID_CHOICES[computer_choice]
+    return game_over
 
-        prompt(f'You: {" " * 15}{player_choice_string.capitalize()}')
-        prompt(f'Computer: {" " * 10}{computer_choice_string.capitalize()}')
-
-        if player_wins(player_choice_string, computer_choice_string):
-            player_1_score = update_score(player_1_score)
-            prompt(f'Result:{" " * 13}{MESSAGES["winner"]}')
-            display_outcome(player_choice, computer_choice)
-        elif player_wins(computer_choice_string, player_choice_string):
-            player_2_score = update_score(player_2_score)
-            prompt(f'Result:{" " * 13}{MESSAGES["lose"]}')
-            display_outcome(computer_choice, player_choice)
-        else:
-            prompt(f'Result:{" " * 13}{MESSAGES["tie"]}')
-
-        game_round += 1
-
-        if player_1_score == 3:
-            prompt(MESSAGES["end_winner"])
-            break
-        if player_2_score == 3:
-            prompt(MESSAGES["end_loser"])
-            break
-
+def play_again():
     prompt(MESSAGES['play_again'])
-    play_again = input()
-    if play_again == 'n':
-        break
+    user_response = input()
+    if user_response == 'n':
+        prompt(MESSAGES["end_game"])
+        return False
+    return True
+
+def main_game():
+    while True:
+        player_score = 0
+        computer_score = 0
+        game_round = 1
+        clear_screen()
+        display_welcome_message()
+
+        while True:
+            display_round(game_round)
+            display_scoreboard(game_round, player_score, computer_score)
+            player_choice = prompt_player_choice()
+            computer_choice = get_computer_choice()
+            round_winner = get_winner(player_choice, computer_choice)
+            if round_winner == "you":
+                player_score = update_score(player_score)
+            elif round_winner == "computer":
+                computer_score = update_score(computer_score)
+            display_choices(player_choice, computer_choice)
+            display_result(round_winner)
+            display_outcome(player_choice, computer_choice, round_winner)
+
+            wait(2)
+
+            if game_over_check(player_score, computer_score):
+                break
+
+            game_round += 1
+
+        if play_again() is False:
+            break
+
+main_game()
