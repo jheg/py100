@@ -71,16 +71,6 @@ Options:
 Best of 5, good luck!
 """)
 
-def display_round(current_round):
-    if current_round > 1:
-        clear_screen()
-    prompt(f'Round {current_round}')
-
-def display_scoreboard(game_round, player_score, computer_score):
-    if game_round > 1:
-        prompt(f"Player 1 score: {player_score}")
-        prompt(f"Computer score: {computer_score}\n")
-
 def prompt_player_choice():
     prompt(MESSAGES["choose"])
     player_choice = input()
@@ -117,6 +107,17 @@ def get_winner(player, computer):
 
     return False
 
+def display_scoreboard(scoreboard):
+    if scoreboard["game_round"] > 0:
+        prompt(f'Round {scoreboard["game_round"]}')
+        prompt(f'Your score: {scoreboard["you"]}')
+        prompt(f'Computer score: {scoreboard["computer"]}\n')
+
+def update_scoreboard(scoreboard, round_winner):
+        if round_winner:
+            scoreboard[round_winner] += 1
+        scoreboard["game_round"] += 1
+
 def display_result(round_winner):
     if round_winner == "you":
         prompt(f'Result:{" " * 13}{MESSAGES["winner"]}')
@@ -132,22 +133,24 @@ def display_outcome(player_choice, computer_choice, round_winner):
         case "you":
             prompt(f'Outcome:{" " * 12}{player_choice} '
                 f'{WINNING_COMBOS[player_choice][computer_choice]} '
-                f'{computer_choice}\n')
+                f'{computer_choice}')
         case "computer":
             prompt(f'Outcome:{" " * 12}{computer_choice} '
                 f'{WINNING_COMBOS[computer_choice][player_choice]} '
-                f'{player_choice}\n')
+                f'{player_choice}')
 
-def update_score(num):
-    return num + 1
+def display_round_summary(player_choice, computer_choice, round_winner):
+    display_choices(player_choice, computer_choice)
+    display_outcome(player_choice, computer_choice, round_winner)
+    display_result(round_winner)
 
-def game_over_check(player_score, computer_score):
+def game_over_check(scoreboard):
     game_over = False
-    if player_score == 3:
+    if scoreboard["you"] == 3:
         prompt(MESSAGES["end_winner"])
         game_over = True
         return game_over
-    if computer_score == 3:
+    if scoreboard["computer"] == 3:
         prompt(MESSAGES["end_loser"])
         game_over = True
         return game_over
@@ -164,32 +167,25 @@ def play_again():
 
 def main_game():
     while True:
-        player_score = 0
-        computer_score = 0
-        game_round = 1
+        scoreboard = {
+            "you": 0,
+            "computer": 0,
+            "game_round": 1
+        }
         clear_screen()
         display_welcome_message()
 
         while True:
-            display_round(game_round)
-            display_scoreboard(game_round, player_score, computer_score)
+            display_scoreboard(scoreboard)
             player_choice = prompt_player_choice()
             computer_choice = get_computer_choice()
             round_winner = get_winner(player_choice, computer_choice)
-            if round_winner == "you":
-                player_score = update_score(player_score)
-            elif round_winner == "computer":
-                computer_score = update_score(computer_score)
-            display_choices(player_choice, computer_choice)
-            display_result(round_winner)
-            display_outcome(player_choice, computer_choice, round_winner)
-
+            update_scoreboard(scoreboard, round_winner)
+            display_round_summary(player_choice, computer_choice, round_winner)
             wait(2)
-
-            if game_over_check(player_score, computer_score):
+            clear_screen()
+            if game_over_check(scoreboard):
                 break
-
-            game_round += 1
 
         if play_again() is False:
             break
