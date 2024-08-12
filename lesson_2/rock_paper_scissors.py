@@ -114,9 +114,9 @@ def display_scoreboard(scoreboard):
         prompt(f'Computer score: {scoreboard["computer"]}\n')
 
 def update_scoreboard(scoreboard, round_winner):
-        if round_winner:
-            scoreboard[round_winner] += 1
-        scoreboard["game_round"] += 1
+    if round_winner:
+        scoreboard[round_winner] += 1
+    scoreboard["game_round"] += 1
 
 def display_result(round_winner):
     if round_winner == "you":
