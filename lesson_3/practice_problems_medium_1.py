@@ -230,10 +230,3 @@ f = 0
 print(id(d))
 print(id(e))
 print(id(f))
-
-
-
-
-
-
-

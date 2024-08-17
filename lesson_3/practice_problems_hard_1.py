@@ -145,4 +145,4 @@ def is_dot_separated_ip_address(input_string):
 if False:
     greeting = "hello world"
 
-print(greeting) # Undefined variable error
+print(greeting) # NameError: Undefined variable error
