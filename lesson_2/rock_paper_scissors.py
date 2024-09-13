@@ -182,7 +182,7 @@ def main_game():
             round_winner = get_winner(player_choice, computer_choice)
             update_scoreboard(scoreboard, round_winner)
             display_round_summary(player_choice, computer_choice, round_winner)
-            wait(2)
+            wait(3)
             clear_screen()
             if game_over_check(scoreboard):
                 break
